@@ -181,7 +181,13 @@ const AnalysisCharts: React.FC<AnalysisChartsProps> = ({
                   />
                 ))}
               </Pie>
-              <Tooltip formatter={(value) => `${value.toFixed(0)}%`} />
+              <Tooltip 
+                formatter={(value: number | string) => {
+                  return typeof value === 'number' 
+                    ? `${value.toFixed(0)}%` 
+                    : `${value}%`;
+                }} 
+              />
               <Legend />
             </PieChart>
           </ResponsiveContainer>

@@ -1,4 +1,3 @@
-
 export interface AudioRecorderState {
   recording: boolean;
   audioBlob: Blob | null;

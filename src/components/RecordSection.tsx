@@ -1,8 +1,7 @@
-
 import React, { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
-import { Mic, MicOff, Pause, Stop } from 'lucide-react';
+import { Mic, MicOff, Pause, Square } from 'lucide-react';
 import { formatTime, createDownloadLink, isBrowserSupported } from '@/utils/audioUtils';
 import { toast } from '@/components/ui/sonner';
 
@@ -170,7 +169,7 @@ const RecordSection: React.FC<RecordSectionProps> = ({ onRecordingComplete }) =>
                   </Button>
                 )}
                 <Button onClick={stopRecording} variant="destructive" size="icon">
-                  <Stop className="h-4 w-4" />
+                  <Square className="h-4 w-4" />
                 </Button>
               </div>
             </div>
