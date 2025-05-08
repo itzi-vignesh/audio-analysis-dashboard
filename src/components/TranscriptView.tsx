@@ -1,7 +1,6 @@
-
 import React, { useState, useEffect, useRef } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { TranscriptSegment } from '@/utils/mockData';
+import { TranscriptSegment } from '@/utils/callTypes';
 import { formatTime } from '@/utils/audioUtils';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { cn } from '@/lib/utils';

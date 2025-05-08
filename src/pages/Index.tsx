@@ -4,21 +4,21 @@ import { useNavigate } from 'react-router-dom';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import UploadSection from '@/components/UploadSection';
 import RecordSection from '@/components/RecordSection';
-import { CallAnalysis, fetchMockAnalysis } from '@/utils/mockData';
 import { toast } from '@/components/ui/sonner';
+import { useAnalyzeAudio, useAnalyzeRecording } from '@/services/apiService';
 
 const Index = () => {
-  const [isAnalyzing, setIsAnalyzing] = useState(false);
   const navigate = useNavigate();
+  const analyzeAudio = useAnalyzeAudio();
+  const analyzeRecording = useAnalyzeRecording();
 
   const handleUploadComplete = async (file: File) => {
-    setIsAnalyzing(true);
     try {
       // Create a temporary URL for the file
       const url = URL.createObjectURL(file);
       
-      // Fetch mock analysis data (in a real app, this would be an API call)
-      const result = await fetchMockAnalysis();
+      // Call the API to analyze the file
+      const result = await analyzeAudio.mutateAsync(file);
       
       // Navigate to results page with analysis data
       navigate('/results', { 
@@ -30,18 +30,16 @@ const Index = () => {
     } catch (error) {
       toast.error('Failed to analyze the audio. Please try again.');
       console.error('Analysis error:', error);
-      setIsAnalyzing(false);
     }
   };
 
   const handleRecordingComplete = async (blob: Blob, duration: number) => {
-    setIsAnalyzing(true);
     try {
       // Create a URL for the recorded blob
       const url = URL.createObjectURL(blob);
       
-      // Fetch mock analysis data (in a real app, this would be an API call)
-      const result = await fetchMockAnalysis();
+      // Call the API to analyze the recording
+      const result = await analyzeRecording.mutateAsync({ blob, duration });
       
       // Navigate to results page with analysis data
       navigate('/results', { 
@@ -53,7 +51,6 @@ const Index = () => {
     } catch (error) {
       toast.error('Failed to analyze the recording. Please try again.');
       console.error('Analysis error:', error);
-      setIsAnalyzing(false);
     }
   };
 
@@ -66,7 +63,7 @@ const Index = () => {
         </p>
       </div>
 
-      {isAnalyzing ? (
+      {analyzeAudio.isPending || analyzeRecording.isPending ? (
         <div className="flex flex-col items-center justify-center py-20">
           <div className="w-16 h-16 border-4 border-primary border-t-transparent rounded-full animate-spin mb-4"></div>
           <h2 className="text-2xl font-semibold mb-2">Analyzing Audio</h2>

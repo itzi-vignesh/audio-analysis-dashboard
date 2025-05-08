@@ -144,11 +144,13 @@ const AnalysisCharts: React.FC<AnalysisChartsProps> = ({
               <XAxis type="number" domain={[0, 100]} />
               <YAxis dataKey="name" type="category" width={100} />
               <CartesianGrid strokeDasharray="3 3" />
-              <Tooltip formatter={(value: number | string) => {
-                return typeof value === 'number' 
-                  ? `${value.toFixed(0)}%` 
-                  : `${value}%`;
-              }} />
+              <Tooltip 
+                formatter={(value) => {
+                  return typeof value === 'number' 
+                    ? `${value.toFixed(0)}%` 
+                    : `${value}%`;
+                }} 
+              />
               <Bar dataKey="value" radius={[0, 4, 4, 0]}>
                 {scoreData.map((entry, index) => (
                   <Cell key={`cell-${index}`} fill={scoreColors[entry.name as keyof typeof scoreColors]} />
@@ -186,11 +188,11 @@ const AnalysisCharts: React.FC<AnalysisChartsProps> = ({
                 ))}
               </Pie>
               <Tooltip 
-                formatter={(value: number | string) => {
+                formatter={(value) => {
                   return typeof value === 'number' 
                     ? `${value.toFixed(0)}%` 
                     : `${value}%`;
-                }} 
+                }}
               />
               <Legend />
             </PieChart>

@@ -7,7 +7,7 @@ import { Download } from 'lucide-react';
 import AudioPlayer from './AudioPlayer';
 import TranscriptView from './TranscriptView';
 import AnalysisCharts from './AnalysisCharts';
-import { CallAnalysis } from '@/utils/mockData';
+import { CallAnalysis } from '@/utils/callTypes';
 import { generatePDF } from '@/utils/audioUtils';
 
 interface AnalysisDashboardProps {

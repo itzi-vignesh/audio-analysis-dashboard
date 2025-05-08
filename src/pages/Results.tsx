@@ -2,7 +2,7 @@
 import React, { useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import AnalysisDashboard from '@/components/AnalysisDashboard';
-import { CallAnalysis } from '@/utils/mockData';
+import { CallAnalysis } from '@/utils/callTypes';
 import { toast } from '@/components/ui/sonner';
 
 const Results = () => {
